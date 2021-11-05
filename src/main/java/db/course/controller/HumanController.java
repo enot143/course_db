@@ -53,7 +53,7 @@ public class HumanController {
         return null;
     }
 
-
+    //TODO:тот же чекер для возраста
     @PutMapping("{human_id}")
     public Human update(@PathVariable("human_id") Human humanFromDb,
                                       @RequestBody Human human) {
@@ -63,6 +63,6 @@ public class HumanController {
 
     @DeleteMapping("{human_id}")
     public void delete(@PathVariable("human_id") Human human) {
-        humanRepo.delete(human);
+            humanRepo.delete(human);
     }
 }

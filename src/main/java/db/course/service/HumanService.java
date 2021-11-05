@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 public class HumanService {
     @Autowired
     private HumanRepo humanRepo;
-    
-    public HumanService(HumanRepo humanRepo) {
-        this.humanRepo = humanRepo;
-    }
+
     public Human loadHumanByName(String name) throws UsernameNotFoundException {
         return humanRepo.findByName(name);
+    }
+
+    public Human findByHuman_id(Long human_id) {
+        return humanRepo.findHumanById(human_id);
     }
 }
