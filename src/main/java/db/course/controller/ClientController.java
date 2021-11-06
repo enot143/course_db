@@ -1,10 +1,10 @@
 package db.course.controller;
 
 import db.course.domain.Client;
-import db.course.domain.ClientForm;
-import db.course.repos.ClientRepo;
-import db.course.service.HumanService;
+import db.course.form.ClientForm;
+import db.course.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,17 +13,15 @@ import java.util.List;
 @RequestMapping("client")
 public class ClientController {
     @Autowired
-    private final ClientRepo clientRepo;
-    @Autowired
-    private HumanService humanService;
+    private final ClientService clientService;
 
-    public ClientController(ClientRepo clientRepo) {
-        this.clientRepo = clientRepo;
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
     }
 
     @GetMapping
     public List<Client> list() {
-        return clientRepo.findAll();
+        return clientService.findAll();
     }
 
     @GetMapping("{client_id}")
@@ -32,26 +30,18 @@ public class ClientController {
     }
 
     @PostMapping
-    public Client create(@RequestBody ClientForm form) {
-        Client client = new Client();
-        client.setCash(form.getCash());
-        client.setPolice(form.isPolice());
-        client.setHuman(humanService.findByHuman_id(form.getHuman_id()));
-        return clientRepo.save(client);
+    public ResponseEntity<?> create(@RequestBody ClientForm form) {
+        return clientService.add(form);
     }
 
     @PutMapping("{client_id}")
-    public Client update(@PathVariable("client_id") Long id,
+    public ResponseEntity<?> update(@PathVariable("client_id") Long id,
                          @RequestBody ClientForm form) {
-        Client c = clientRepo.findClientById(id);
-        c.setPolice(form.isPolice());
-        c.setCash(form.getCash());
-        c.setHuman(humanService.findByHuman_id(form.getHuman_id()));
-        return clientRepo.save(c);
+        return clientService.update(id, form);
     }
 
-    @DeleteMapping("{address_id}")
-    public void delete(@PathVariable("address_id") Client address) {
-        clientRepo.delete(address);
+    @DeleteMapping("{client_id}")
+    public void delete(@PathVariable("client_id") Client client) {
+        clientService.delete(client);
     }
 }

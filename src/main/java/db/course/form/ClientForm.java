@@ -1,4 +1,4 @@
-package db.course.domain;
+package db.course.form;
 
 public class ClientForm {
     private boolean police;

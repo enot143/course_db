@@ -47,13 +47,13 @@ public class HumanController {
         } catch (DataIntegrityViolationException e) {
             System.out.println(e.getMostSpecificCause().getMessage());
             if (e.getMostSpecificCause().getMessage().contains("human_age_check")){
-                return new ResponseEntity<>("\"human_age_check error", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("human_age_check error", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
         return null;
     }
 
-    //TODO:тот же чекер для возраста
+    //TODO:check
     @PutMapping("{human_id}")
     public Human update(@PathVariable("human_id") Human humanFromDb,
                                       @RequestBody Human human) {
