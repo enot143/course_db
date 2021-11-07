@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface CaseRepo extends JpaRepository<Case, Integer> {
     Case findCaseById(Integer id);
     @Procedure(value = "end_case")
-    void endCase(@Param("case_id") Integer caseId);
+    int endCase(@Param("case_id") Integer caseId);
 }

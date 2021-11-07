@@ -7,20 +7,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "crimetype")
-@ToString(of = {"crimetype_id", "crimetype_name"})
-@EqualsAndHashCode(of = {"crimetype_id"})
+@ToString(of = {"id", "crimetype_name"})
+@EqualsAndHashCode(of = {"id"})
 public class CrimeType {
     @Id
+    @Column(name = "crimetype_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long crimetype_id;
+    private Long id;
     private String crimetype_name;
 
     public Long getCrimetype_id() {
-        return crimetype_id;
+        return id;
     }
 
     public void setCrimetype_id(Long crimetype_id) {
-        this.crimetype_id = crimetype_id;
+        this.id = crimetype_id;
     }
 
     public String getCrimetype_name() {

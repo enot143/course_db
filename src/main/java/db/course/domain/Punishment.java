@@ -8,21 +8,22 @@ import java.sql.Date;
 
 @Entity
 @Table
-@ToString(of = {"punishment_id", "punishment_name", "punishment_lasting"})
-@EqualsAndHashCode(of = {"punishment_id"})
+@ToString(of = {"id", "punishment_name", "punishment_lasting"})
+@EqualsAndHashCode(of = {"id"})
 public class Punishment {
     @Id
+    @Column(name = "punishment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long punishment_id;
+    private Long id;
     private String punishment_name;
     private Date punishment_lasting;
 
     public Long getPunishment_id() {
-        return punishment_id;
+        return id;
     }
 
     public void setPunishment_id(Long punishment_id) {
-        this.punishment_id = punishment_id;
+        this.id = punishment_id;
     }
 
     public String getPunishment_name() {

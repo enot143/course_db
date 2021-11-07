@@ -4,6 +4,7 @@ package db.course.exceptions;
 public class Response {
     private final String caseNotStarted = "case is not started yet";
     private final String lessThanOneCriminal = "in case must be found at least 1 criminal";
+    private final String caseFinished = "case has already been finished";
 
     private String message;
 
@@ -22,6 +23,9 @@ public class Response {
         else if (message.contains(lessThanOneCriminal)){
             this.message = lessThanOneCriminal;
         }
-        else this.message = "message is not available";
+        else if (message.contains(caseFinished)){
+            this.message = caseFinished;
+        }
+        else this.message = message;
     }
 }
