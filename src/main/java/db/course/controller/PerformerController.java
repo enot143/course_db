@@ -5,6 +5,7 @@ import db.course.domain.Performer;
 import db.course.form.PerformerForm;
 import db.course.service.PerformerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class PerformerController {
     }
 
     @GetMapping
-    public List<Performer> list() {
+    public ResponseEntity<?> list() {
         return performerService.findAll();
     }
 

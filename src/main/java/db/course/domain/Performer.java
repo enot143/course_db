@@ -1,5 +1,6 @@
 package db.course.domain;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

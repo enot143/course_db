@@ -1,14 +1,17 @@
 package db.course.service;
 
 import db.course.domain.Performer;
+import db.course.dto.PerformerDTO;
 import db.course.form.PerformerForm;
 import db.course.repos.AddressRepo;
 import db.course.repos.HumanRepo;
 import db.course.repos.PerformerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class PerformerService {
@@ -19,8 +22,8 @@ public class PerformerService {
     @Autowired
     AddressRepo addressRepo;
 
-    public List<Performer> findAll() {
-        return performerRepo.findAll();
+    public ResponseEntity<?> findAll() {
+        return methodJSON();
     }
 
     public Performer add(PerformerForm form){
@@ -41,5 +44,17 @@ public class PerformerService {
         performer.setHuman(humanRepo.findHumanById(form.getHuman_id()));
         performer.setAddress(addressRepo.findAddressById(form.getAddress_id()));
         return performerRepo.save(performer);
+    }
+    private ResponseEntity<?> methodJSON(){
+        ArrayList<PerformerDTO> performers = new ArrayList<>();
+        performerRepo.findAll().forEach(performer -> {
+            PerformerDTO performerDTO = new PerformerDTO();
+            performerDTO.setId(performer.getId());
+            performerDTO.setName(performer.getHuman().getName());
+            performerDTO.setSurname(performer.getHuman().getSurname());
+            performerDTO.setProfession(performer.getHuman().getProfession());
+            performers.add(performerDTO);
+        });
+        return new ResponseEntity<>(performers, HttpStatus.OK);
     }
 }

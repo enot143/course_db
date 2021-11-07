@@ -1,6 +1,5 @@
 package db.course.exceptions;
 
-import java.util.Set;
 
 public class Response {
     private final String caseNotStarted = "case is not started yet";
@@ -15,6 +14,7 @@ public class Response {
         return message;
     }
 
+    //TODO
     public void setMessage(String message) {
         if (message.contains(caseNotStarted)){
             this.message = caseNotStarted;
