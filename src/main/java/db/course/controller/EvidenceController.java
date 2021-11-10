@@ -4,6 +4,7 @@ import db.course.domain.Evidence;
 import db.course.form.EvidenceForm;
 import db.course.service.EvidenceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class EvidenceController {
     }
 
     @GetMapping
-    public List<Evidence> list() {
+    public ResponseEntity<?> list() {
         return evidenceService.findAll();
     }
 

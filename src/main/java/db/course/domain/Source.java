@@ -7,36 +7,39 @@ import javax.persistence.*;
 
 @Entity
 @Table
-@ToString(of = {"source_id", "source_name", "source_rating"})
-@EqualsAndHashCode(of = {"source_id"})
+@ToString(of = {"id", "name", "rating"})
+@EqualsAndHashCode(of = {"id"})
 public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long source_id;
-    private String source_name;
-    private Long source_rating;
+    @Column(name = "source_id")
+    private Long id;
+    @Column(name = "source_name")
+    private String name;
+    @Column(name = "source_rating")
+    private Long rating;
 
-    public Long getSource_id() {
-        return source_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setSource_id(Long source_id) {
-        this.source_id = source_id;
+    public void setId(Long source_id) {
+        this.id = source_id;
     }
 
-    public String getSource_name() {
-        return source_name;
+    public String getName() {
+        return name;
     }
 
-    public void setSource_name(String source_name) {
-        this.source_name = source_name;
+    public void setName(String source_name) {
+        this.name = source_name;
     }
 
-    public Long getSource_rating() {
-        return source_rating;
+    public Long getRating() {
+        return rating;
     }
 
-    public void setSource_rating(Long source_rating) {
-        this.source_rating = source_rating;
+    public void setRating(Long source_rating) {
+        this.rating = source_rating;
     }
 }

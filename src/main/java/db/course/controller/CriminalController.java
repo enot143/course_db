@@ -4,6 +4,7 @@ import db.course.domain.Criminal;
 import db.course.form.CriminalForm;
 import db.course.service.CriminalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CriminalController {
     }
 
     @GetMapping
-    public List<Criminal> list() {
+    public ResponseEntity<?> list() {
         return criminalService.findAll();
     }
 

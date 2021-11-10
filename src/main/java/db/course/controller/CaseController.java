@@ -4,6 +4,7 @@ import db.course.domain.Case;
 import db.course.form.CaseForm;
 import db.course.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class CaseController {
     }
 
     @GetMapping
-    public List<Case> list() {
+    public ResponseEntity<?> list() {
         return caseService.findAll();
     }
 

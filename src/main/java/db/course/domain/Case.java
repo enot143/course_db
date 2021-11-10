@@ -6,6 +6,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Set;
+//TODO:manytomany
 @Entity
 @Data
 @Table(name = "\"case\"")

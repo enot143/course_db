@@ -4,6 +4,7 @@ import db.course.domain.Suspect;
 import db.course.form.SuspectForm;
 import db.course.service.SuspectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SuspectController {
     }
 
     @GetMapping
-    public List<Suspect> list() {
+    public ResponseEntity<?> list() {
         return suspectService.findAll();
     }
 

@@ -2,15 +2,18 @@ package db.course.service;
 
 
 import db.course.domain.Case;
+import db.course.dto.CaseDTO;
 import db.course.form.CaseForm;
 import db.course.repos.AddressRepo;
 import db.course.repos.CaseRepo;
 import db.course.repos.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class CaseService {
@@ -21,8 +24,8 @@ public class CaseService {
     @Autowired
     ClientRepo clientRepo;
 
-    public List<Case> findAll() {
-        return caseRepo.findAll();
+    public ResponseEntity<?> findAll() {
+        return getJSON();
     }
 
     public Case add(CaseForm form){
@@ -50,5 +53,19 @@ public class CaseService {
         c.setClient(clientRepo.findClientById(form.getClient_id()));
         c.setAddress(addressRepo.findAddressById(form.getAddress_id()));
         return caseRepo.save(c);
+    }
+    private ResponseEntity<?> getJSON(){
+        ArrayList<CaseDTO> cases = new ArrayList<>();
+        caseRepo.findAll().forEach(c -> {
+            CaseDTO caseDTO = new CaseDTO();
+            caseDTO.setId(c.getId());
+            caseDTO.setAddress(c.getAddress());
+            caseDTO.setClient(c.getClient());
+            caseDTO.setFinish(c.getEnd_date());
+            caseDTO.setStart(c.getStart_date());
+            caseDTO.setCaseName(c.getName());
+            cases.add(caseDTO);
+        });
+        return new ResponseEntity<>(cases, HttpStatus.OK);
     }
 }
