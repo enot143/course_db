@@ -54,8 +54,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/**")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/**")
+                .permitAll()
+                .antMatchers(HttpMethod.DELETE, "/**")
+                .permitAll()
+                .antMatchers(HttpMethod.PUT, "/**")
+//                .permitAll()
+//                .and().formLogin()
+//                .and().logout()
                 .permitAll();
-
     }
 
     @Bean

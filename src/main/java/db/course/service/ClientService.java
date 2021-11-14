@@ -48,7 +48,7 @@ public class ClientService {
         ArrayList<ClientDTO> clients = new ArrayList<>();
         clientRepo.findAll().forEach(c -> {
             ClientDTO clientDTO = new ClientDTO();
-            clientDTO.setId(c.getClient_id());
+            clientDTO.setId(c.getId());
             clientDTO.setMoney(c.getCash());
             clientDTO.setPolice(c.isPolice());
             clientDTO.setName(c);

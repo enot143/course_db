@@ -1,22 +1,21 @@
 package db.course.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
+
 
 @Controller
 public class MainController {
+    //    @GetMapping
+//    public String main(Model model, @AuthenticationPrincipal User user) {
+//        model.addAttribute("profile", user);
+//        return "index";
+//    }
     @GetMapping
     public String main(Model model) {
         return "index";
     }
-//    @RequestMapping("/")
-//    public ModelAndView index () {
-//        ModelAndView modelAndView = new ModelAndView();
-//        HashMap<Object, Object> data = new HashMap<>();
-//        data.put("people", humanRepo.findAll());
-//        modelAndView.getModelMap().addAttribute("frontendData", data);
-//        modelAndView.setViewName("index");
-//        return modelAndView;
-//    }
 }
