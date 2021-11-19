@@ -5,6 +5,7 @@ public class Response {
     private final String caseNotStarted = "case is not started yet";
     private final String lessThanOneCriminal = "in case must be found at least 1 criminal";
     private final String caseFinished = "case has already been finished";
+    private final String foreign = "нарушает ограничение внешнего ключа";
 
     private String message;
 
@@ -25,6 +26,9 @@ public class Response {
         }
         else if (message.contains(caseFinished)){
             this.message = caseFinished;
+        }
+        else if (message.contains(foreign)){
+            this.message = message;
         }
         else this.message = message;
     }
