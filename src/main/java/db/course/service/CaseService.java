@@ -46,6 +46,9 @@ public class CaseService {
         caseRepo.delete(c);
     }
 
+    public void endCase(Case c) {
+        caseRepo.endCase(c.getId());
+    }
 
     @Transactional
     Case setCaseParameters(Case c, CaseForm form){
@@ -54,6 +57,7 @@ public class CaseService {
         c.setAddress(addressRepo.findAddressById(form.getAddress_id()));
         return caseRepo.save(c);
     }
+    //TODO:sort
     private ResponseEntity<?> getJSON(){
         ArrayList<CaseDTO> cases = new ArrayList<>();
         caseRepo.findAll().forEach(c -> {

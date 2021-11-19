@@ -40,6 +40,10 @@ public class CaseController {
                          @RequestBody CaseForm form) {
         return caseService.update(id, form);
     }
+    @GetMapping("end/{case_id}")
+    public void endCase(@PathVariable("case_id") Case c){
+        caseService.endCase(c);
+    }
 
     @DeleteMapping("{case_id}")
     public void delete(@PathVariable("case_id") Case c) {
