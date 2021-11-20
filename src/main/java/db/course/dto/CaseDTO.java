@@ -1,63 +1,67 @@
 package db.course.dto;
 
-import db.course.domain.Address;
-import db.course.domain.Client;
+import db.course.domain.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CaseDTO {
-    private Integer id;
-    private String client;
-    private String address;
-    private String caseName;
-    private Date start;
-    private Date finish;
+    private Case aCase;
+    private List<String> listOfEvidences;
+    private ArrayList<String> listOfPerformers;
+    private ArrayList<String> listOfCriminals;
+    private ArrayList<String> listOfSources;
 
-    public Integer getId() {
-        return id;
+    public Case getaCase() {
+        return aCase;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setaCase(Case aCase) {
+        this.aCase = aCase;
     }
 
-    public String getClient() {
-        return client;
+    public List<String> getListOfEvidences() {
+        return listOfEvidences;
     }
 
-    public void setClient(Client client) {
-        this.client = client.getHuman().getName() + " " + client.getHuman().getSurname();
+    public void setListOfEvidences(List<String> listOfEvidences) {
+        this.listOfEvidences = listOfEvidences;
     }
 
-    public String getAddress() {
-        return address;
+    public ArrayList<String> getListOfPerformers() {
+        return listOfPerformers;
     }
 
-    public void setAddress(Address address) {
-        this.address = address.getCity() + ", " + address.getStreet() + ", " + address.getHouse();
+    public void setListOfPerformers(ArrayList<String> listOfPerformers) {
+        ArrayList<String> newList = new ArrayList<>();
+        String temp;
+        for (int i = 0; i < listOfPerformers.toArray().length; i++){
+            temp = listOfPerformers.get(i);
+            newList.add(temp.replace(',', ' '));
+        }
+        this.listOfPerformers = newList;
     }
 
-    public String getCaseName() {
-        return caseName;
+    public ArrayList<String> getListOfCriminals() {
+        return listOfCriminals;
     }
 
-    public void setCaseName(String caseName) {
-        this.caseName = caseName;
+    public void setListOfCriminals(ArrayList<String> listOfCriminals) {
+        ArrayList<String> newList = new ArrayList<>();
+        String temp;
+        for (int i = 0; i < listOfCriminals.toArray().length; i++){
+            temp = listOfCriminals.get(i);
+            newList.add(temp.replace(',', ' '));
+        }
+        this.listOfCriminals = newList;
     }
 
-    public Date getStart() {
-        return start;
+    public ArrayList<String> getListOfSources() {
+        return listOfSources;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public Date getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Date finish) {
-        this.finish = finish;
+    public void setListOfSources(ArrayList<String> listOfSources) {
+        this.listOfSources = listOfSources;
     }
 }

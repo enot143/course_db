@@ -1,12 +1,11 @@
 package db.course.service;
 
 
-import db.course.domain.Case;
+import db.course.domain.*;
 import db.course.dto.CaseDTO;
+import db.course.dto.CasesDTO;
 import db.course.form.CaseForm;
-import db.course.repos.AddressRepo;
-import db.course.repos.CaseRepo;
-import db.course.repos.ClientRepo;
+import db.course.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +22,10 @@ public class CaseService {
     AddressRepo addressRepo;
     @Autowired
     ClientRepo clientRepo;
+    @Autowired
+    CasePerformerRepo casePerformerRepo;
+    @Autowired
+    CaseSourceRepo caseSourceRepo;
 
     public ResponseEntity<?> findAll() {
         return getJSON();
@@ -50,6 +53,29 @@ public class CaseService {
         caseRepo.endCase(c.getId());
     }
 
+
+    public void addPerformer(Case c, Performer p) {
+        CasePerformerKey casePerformerKey = new CasePerformerKey();
+        casePerformerKey.setCaseId(c.getId());
+        casePerformerKey.setPerformerId(p.getId());
+        CasePerformer casePerformer = new CasePerformer();
+        casePerformer.setC(c);
+        casePerformer.setPerformer(p);
+        casePerformer.setId(casePerformerKey);
+        casePerformerRepo.save(casePerformer);
+    }
+
+    public void addSource(Case c, Source s) {
+        CaseSourceKey caseSourceKey = new CaseSourceKey();
+        caseSourceKey.setCaseId(c.getId());
+        caseSourceKey.setSourceId(s.getId());
+        CaseSource caseSource = new CaseSource();
+        caseSource.setC(c);
+        caseSource.setSource(s);
+        caseSource.setId(caseSourceKey);
+        caseSourceRepo.save(caseSource);
+    }
+
     @Transactional
     Case setCaseParameters(Case c, CaseForm form){
         c.setName(form.getName());
@@ -59,9 +85,9 @@ public class CaseService {
     }
     //TODO:sort
     private ResponseEntity<?> getJSON(){
-        ArrayList<CaseDTO> cases = new ArrayList<>();
+        ArrayList<CasesDTO> cases = new ArrayList<>();
         caseRepo.findAll().forEach(c -> {
-            CaseDTO caseDTO = new CaseDTO();
+            CasesDTO caseDTO = new CasesDTO();
             caseDTO.setId(c.getId());
             caseDTO.setAddress(c.getAddress());
             caseDTO.setClient(c.getClient());
@@ -71,5 +97,15 @@ public class CaseService {
             cases.add(caseDTO);
         });
         return new ResponseEntity<>(cases, HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getOne(Case c) {
+        CaseDTO caseDTO = new CaseDTO();
+        caseDTO.setaCase(c);
+        caseDTO.setListOfEvidences(caseRepo.findEvidences(c.getId()));
+        caseDTO.setListOfPerformers(caseRepo.findPerformers(c.getId()));
+        caseDTO.setListOfCriminals(caseRepo.findCriminals(c.getId()));
+        caseDTO.setListOfSources(caseRepo.findSources(c.getId()));
+        return new ResponseEntity<>(caseDTO, HttpStatus.OK);
     }
 }

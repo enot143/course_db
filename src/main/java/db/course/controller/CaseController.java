@@ -1,6 +1,8 @@
 package db.course.controller;
 
 import db.course.domain.Case;
+import db.course.domain.Performer;
+import db.course.domain.Source;
 import db.course.form.CaseForm;
 import db.course.service.CaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,8 @@ public class CaseController {
 
     //TODO: list of evidences, criminals, performers
     @GetMapping("{case_id}")
-    public Case getOne(@PathVariable("case_id") Case c) {
-        return c;
+    public ResponseEntity<?> getOne(@PathVariable("case_id") Case c) {
+        return caseService.getOne(c);
     }
 
     @PostMapping
@@ -43,6 +45,16 @@ public class CaseController {
     @GetMapping("end/{case_id}")
     public void endCase(@PathVariable("case_id") Case c){
         caseService.endCase(c);
+    }
+
+    @GetMapping("performer/{case_id}/{performer_id}")
+    public void addPerformer(@PathVariable("case_id") Case c, @PathVariable("performer_id")Performer p){
+        caseService.addPerformer(c, p);
+    }
+
+    @GetMapping("source/{case_id}/{source_id}")
+    public void addSource(@PathVariable("case_id") Case c, @PathVariable("source_id") Source s){
+        caseService.addSource(c, s);
     }
 
     @DeleteMapping("{case_id}")

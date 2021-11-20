@@ -2,10 +2,6 @@ package db.course.exceptions;
 
 
 public class Response {
-    private final String caseNotStarted = "case is not started yet";
-    private final String lessThanOneCriminal = "in case must be found at least 1 criminal";
-    private final String caseFinished = "case has already been finished";
-    private final String foreign = "нарушает ограничение внешнего ключа";
 
     private String message;
 
@@ -16,20 +12,14 @@ public class Response {
         return message;
     }
 
-    //TODO
-    public void setMessage(String message) {
-        if (message.contains(caseNotStarted)){
-            this.message = caseNotStarted;
+    public void setMessage(String message){
+        boolean f = false;
+        for (ExceptionEnum value : ExceptionEnum.values()) {
+            if (message.contains(value.getResponse())){
+                this.message = value.getResponse();
+                f = true;
+            }
         }
-        else if (message.contains(lessThanOneCriminal)){
-            this.message = lessThanOneCriminal;
-        }
-        else if (message.contains(caseFinished)){
-            this.message = caseFinished;
-        }
-        else if (message.contains(foreign)){
-            this.message = message;
-        }
-        else this.message = message;
+        if (!f) this.message = message;
     }
 }
