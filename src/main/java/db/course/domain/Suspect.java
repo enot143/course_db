@@ -18,7 +18,7 @@ public class Suspect {
     private Long id;
     private boolean isCriminal;
     private String appearance;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "human_id", referencedColumnName = "human_id")
     private Human human;
 }

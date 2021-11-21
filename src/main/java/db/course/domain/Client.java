@@ -18,7 +18,7 @@ public class Client {
     private Long id;
     private boolean police;
     private Long cash;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "human_id", referencedColumnName = "human_id")
     private Human human;
 }

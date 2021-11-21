@@ -19,10 +19,10 @@ public class Case {
     @Column(name = "case_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "client_id")
     private Client client;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
     @Column(name = "\"name\"")

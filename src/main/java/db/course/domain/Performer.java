@@ -18,10 +18,10 @@ public class Performer {
     @Column(name = "performer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "human_id", referencedColumnName = "human_id")
     private Human human;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "address_id", referencedColumnName = "address_id")
     private Address address;
 }

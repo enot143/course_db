@@ -44,6 +44,7 @@ public class PerformerController {
 
     @DeleteMapping("{performer_id}")
     public void delete(@PathVariable("performer_id") Performer performer) {
+        System.out.println("Удаление" + performer);
         performerService.delete(performer);
     }
 }

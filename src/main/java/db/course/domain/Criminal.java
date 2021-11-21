@@ -15,16 +15,16 @@ public class Criminal {
     @Column(name = "criminal_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "human_id", referencedColumnName = "human_id")
     private Human human;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "crimetype_id", referencedColumnName = "crimetype_id")
     private CrimeType crimeType;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "punishment_id", referencedColumnName = "punishment_id")
     private Punishment punishment;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "case_id", referencedColumnName = "case_id")
     private Case c;
 }
