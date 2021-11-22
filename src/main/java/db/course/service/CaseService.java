@@ -26,6 +26,8 @@ public class CaseService {
     CasePerformerRepo casePerformerRepo;
     @Autowired
     CaseSourceRepo caseSourceRepo;
+    @Autowired
+    PerformerRepo performerRepo;
 
     public ResponseEntity<?> findAll() {
         return getJSON();
@@ -81,7 +83,13 @@ public class CaseService {
         c.setName(form.getName());
         c.setClient(clientRepo.findClientById(form.getClient_id()));
         c.setAddress(addressRepo.findAddressById(form.getAddress_id()));
-        return caseRepo.save(c);
+        Case newCase = caseRepo.save(c);
+        if (form.getPerformers() != null){
+            for (int i = 0; i < form.getPerformers().size(); i++){
+                this.addPerformer(c, performerRepo.findPerformerById(form.getPerformers().get(i)));
+            }
+        }
+        return newCase;
     }
     //TODO:sort
     private ResponseEntity<?> getJSON(){
