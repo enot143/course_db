@@ -28,6 +28,8 @@ public class CaseService {
     CaseSourceRepo caseSourceRepo;
     @Autowired
     PerformerRepo performerRepo;
+    @Autowired
+    SourceRepo sourceRepo;
 
     public ResponseEntity<?> findAll() {
         return getJSON();
@@ -41,9 +43,9 @@ public class CaseService {
     //end case here
     public Case update(Integer id, CaseForm form){
         Case c = caseRepo.findCaseById(id);
-        if (form.getEnd_date() != null){
-            caseRepo.endCase(c.getId());
-        }
+//        if (form.getEnd_date() != null){
+//            caseRepo.endCase(c.getId());
+//        }
         return setCaseParameters(c, form);
     }
 
@@ -67,6 +69,7 @@ public class CaseService {
         casePerformerRepo.save(casePerformer);
     }
 
+
     public void addSource(Case c, Source s) {
         CaseSourceKey caseSourceKey = new CaseSourceKey();
         caseSourceKey.setCaseId(c.getId());
@@ -85,8 +88,17 @@ public class CaseService {
         c.setAddress(addressRepo.findAddressById(form.getAddress_id()));
         Case newCase = caseRepo.save(c);
         if (form.getPerformers() != null){
+            if (form.getPerformers().size() <= 2) {
+                casePerformerRepo.deleteByC_Id(c.getId());
+            }
             for (int i = 0; i < form.getPerformers().size(); i++){
                 this.addPerformer(c, performerRepo.findPerformerById(form.getPerformers().get(i)));
+            }
+        }
+        if (form.getSources() != null){
+            caseSourceRepo.deleteByC_Id(c.getId());
+            for (int i = 0; i < form.getSources().size(); i++){
+                this.addSource(c, sourceRepo.findSourceById(form.getSources().get(i)));
             }
         }
         return newCase;

@@ -1,7 +1,5 @@
 package db.course.form;
 
-import db.course.domain.Performer;
-
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -11,6 +9,7 @@ public class CaseForm {
     private String name;
     private Date end_date;
     private ArrayList<Long> performers;
+    private ArrayList<Long> sources;
 
     public Date getEnd_date() {
         return end_date;
@@ -50,5 +49,13 @@ public class CaseForm {
 
     public void setPerformers(ArrayList<Long> performers) {
         this.performers = performers;
+    }
+
+    public ArrayList<Long> getSources() {
+        return sources;
+    }
+
+    public void setSources(ArrayList<Long> sources) {
+        this.sources = sources;
     }
 }
